@@ -1,4 +1,4 @@
-*{
+body{
   margin : 0;
 }
 .container {
@@ -27,6 +27,7 @@
   width: 100%;
   border: 2px solid rgb(231, 225, 225);
   object-fit: cover;
+  cursor: pointer;
 }
 
 .player-info{

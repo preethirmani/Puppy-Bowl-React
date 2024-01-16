@@ -3,18 +3,18 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import '../index.css'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const API = `https://fsa-puppy-bowl.herokuapp.com/api/2310-fsa-et-web-pt-sf-b-peethi/players`;
 
 const AllPlayers = () => {
   const [allPups, setAllPups] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     async function getAllPlayers() {
       try{
         const data = await fetch(API);
         const json = await data.json();
-       // console.log(json.data.players);
         setAllPups(json.data.players);
         console.log(allPups);
       } catch(error) {
@@ -24,15 +24,16 @@ const AllPlayers = () => {
     getAllPlayers();
   },[])
   return(
-  
-    
     <div className="container">
       {
         allPups.map(pup => {
           return(
-            <div className="player-card"> 
+            <div className="player-card" key={pup.id}> 
              <div className="player-div"> 
-                <img className='player-image' src={pup.imageUrl}/>
+             
+                <img className='player-image' src={pup.imageUrl}
+                 onClick={() => navigate(`/players/${pup.id}`) }/>
+              
               </div>
               <div className="player-info"> 
               <h4>{pup.name}</h4>
@@ -44,7 +45,7 @@ const AllPlayers = () => {
                 <strong>Status: </strong>
                 {pup.status}
               </div>
-              <a><Link>Delete</Link></a>
+              <Link>Delete</Link>
               </div>
             </div>
           )
