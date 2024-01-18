@@ -1,29 +1,48 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from "react";
 import { API_URL } from "../constants";
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import { fetchSinglePlayer } from '../API/ajaxHelpers';
 
 const SinglePlayer = () => {
-  const [singlePlayer, setSinglePlayer ] = useState({});
-
+  const [ playerInfo, setPlayerInfo] = useState({});
   const { playerid } = useParams();
-  console.log('PlayerId:', playerid);
+  const navigate = useNavigate();
   useEffect(() => {
    async function getPlayer() {
-    try {
-      const result = await fetch(`${API_URL}/${playerid}`);
-      const json = await result.json();
-      setSinglePlayer(json);
-    } catch(error) {
-      console.log(error);
-    }
+    const data = await fetchSinglePlayer(playerid);
+    setPlayerInfo(data);
    }
    getPlayer();
-  })
+   
+  },[])
   
   return(
-    <div>
-      SinglePlayer
+    <div className='container-singlePlayer'>
+       <Card style={{ width: '18rem' }}>
+      <Card.Img variant="top" 
+      src={playerInfo.imageUrl} />
+      <Card.Body>
+        <Card.Title>{playerInfo.name}</Card.Title>
+        <Card.Text> 
+          Breed : {playerInfo.breed}
+        </Card.Text>
+         <Card.Text> 
+          Status : {playerInfo.status}
+        </Card.Text>
+        <Card.Text>
+          TeamId : {playerInfo.teamId}
+        </Card.Text>
+        <Card.Text>
+          Cohort : {playerInfo.cohortId}
+        </Card.Text>
+        <Button variant="primary" 
+        onClick={(e) => navigate(`/`) }>
+          Go Back</Button>
+      </Card.Body>
+    </Card>
     </div>
   )
 }
