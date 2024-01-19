@@ -78,3 +78,30 @@ border : 2px solid rgb(168, 167, 167);
   color: red;
   font-weight: bolder;
 }
+
+.container-singlePlayer{
+
+  margin: 2% 20%;
+  display: flex;
+  
+}
+.image-container {
+  width: 400px;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.single-playerImage {
+  height: 100%;
+  width: 100%;
+  border: 2px solid rgb(231, 225, 225);
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.info-container {
+  color: rgb(46, 46, 138);
+  padding : 2%;
+
+}
+
