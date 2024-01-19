@@ -11,6 +11,21 @@ export const fetchAllPlayers = async () => {
   }
 }
 
+export const deletePlayer = async (id) => {
+  try{
+    const response = await fetch(`${API_URL}/${id}`, 
+    {
+      method: 'DELETE',
+
+    });
+    const result = await response.json();
+    console.log('Result',result);
+    return result;
+  }catch(error) {
+    console.log(error);
+  }
+}
+
 export const fetchSinglePlayer = async (id) => {
   try{
     const result = await fetch(`${API_URL}/${id}`);
@@ -32,7 +47,6 @@ export const createNewPlayer = async(newPlayer) => {
         'Content-Type' : 'application/json'
       },
       body : JSON.stringify({
-
         name : newPlayer.name,
         breed : newPlayer.breed,
         status : newPlayer.status,
@@ -42,10 +56,12 @@ export const createNewPlayer = async(newPlayer) => {
       }),
     });
     const result = await response.json();
-    console.log(result);
+    console.log('Result::',result);
+    return result;
 
   }catch(error) {
     console.log(error);
+    return error;
   }
 }
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import '../index.css'
 import { Link, useNavigate } from "react-router-dom";
-import { fetchAllPlayers } from "../API/ajaxHelpers";
+import { fetchAllPlayers, deletePlayer } from "../API/ajaxHelpers";
 
 
 const AllPlayers = () => {
@@ -17,8 +17,14 @@ const AllPlayers = () => {
       setPlayers(data);
       console.log(players);
     } 
-   getPlayers();
+    getPlayers();
+
   },[])
+
+    async function handleDelete(playerId) {
+      await deletePlayer(playerId); 
+      window.location.reload();
+    }
   return(
     <div className="container">
       {
@@ -39,7 +45,9 @@ const AllPlayers = () => {
                 <strong>Status: </strong>
                 {player.status}
               </div>
-              <Link>Delete</Link>
+              <Link onClick={(e) => handleDelete(player.id)}
+              >
+                Delete</Link>
               </div>
             </div>
           )

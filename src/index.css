@@ -69,3 +69,12 @@ border : 2px solid rgb(168, 167, 167);
   border-radius: 6px;
   font-size: large;
  }
+.successMessage {
+  color: green;
+  font-weight: bolder;
+}
+
+.errorMessage {
+  color: red;
+  font-weight: bolder;
+}
