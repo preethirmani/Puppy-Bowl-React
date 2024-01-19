@@ -22,3 +22,30 @@ export const fetchSinglePlayer = async (id) => {
   }
 }
 
+export const createNewPlayer = async(newPlayer) => {
+  try{
+    console.log('NewPlayer:', newPlayer);
+    const response = await fetch(`${API_URL}`, 
+    {
+      method : 'POST',
+      headers : {
+        'Content-Type' : 'application/json'
+      },
+      body : JSON.stringify({
+
+        name : newPlayer.name,
+        breed : newPlayer.breed,
+        status : newPlayer.status,
+        imageUrl : newPlayer.imageUrl,
+        teamId : newPlayer.teamId
+
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+
+  }catch(error) {
+    console.log(error);
+  }
+}
+

@@ -41,7 +41,31 @@ body{
 }
 
 .form-container{
-  border: 2px solid black;
-  margin: 1% 12%;
+  margin: 1% 15%;
   padding: 2%;
 }
+
+.newPlayer-form {
+width: 70%;
+border : 2px solid rgb(168, 167, 167);
+ padding: 2%;
+}
+
+ label {
+  margin: 10px;
+  font-size: large;
+  width: 100%;
+ }
+ input, select{
+  display: block;
+  width: 90%;
+  border: 1px solid rgb(183, 180, 180);
+  border-radius: 5px;
+ }
+
+ .newplayer-submit {
+
+  margin: 1% 40%;
+  border-radius: 6px;
+  font-size: large;
+ }
