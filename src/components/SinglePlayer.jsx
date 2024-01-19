@@ -10,6 +10,7 @@ const SinglePlayer = () => {
   const [ playerInfo, setPlayerInfo] = useState({});
   const { playerid } = useParams();
   const navigate = useNavigate();
+
   useEffect(() => {
    async function getPlayer() {
     const data = await fetchSinglePlayer(playerid);
@@ -17,7 +18,7 @@ const SinglePlayer = () => {
    }
    getPlayer();
    
-  },[])
+  },[playerid])
   
   return(
     <div className='container-singlePlayer'>

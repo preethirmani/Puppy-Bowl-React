@@ -45,9 +45,10 @@ const AllPlayers = () => {
                 <strong>Status: </strong>
                 {player.status}
               </div>
-              <Link onClick={(e) => handleDelete(player.id)}
-              >
-                Delete</Link>
+              <Link 
+              onClick={(e) => handleDelete(player.id)} >
+                Delete
+                </Link>
               </div>
             </div>
           )

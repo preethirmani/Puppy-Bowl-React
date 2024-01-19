@@ -1,10 +1,13 @@
 import { API_URL } from "../constants";
 
+let allPlayers = [];
+
 export const fetchAllPlayers = async () => {
   console.log('FetchAllPlayers');
   try{
     const result = await fetch(API_URL);
     const json = await result.json();
+    allPlayers = json.data.players;
     return json.data.players;
   }catch(error) {
     console.log(error);
@@ -65,3 +68,13 @@ export const createNewPlayer = async(newPlayer) => {
   }
 }
 
+export const searchPlayer = (playerName) => {
+  
+  const player = allPlayers.find((player) => {
+ 
+     return player.name === playerName
+  })
+  
+  return player.id;
+  
+}

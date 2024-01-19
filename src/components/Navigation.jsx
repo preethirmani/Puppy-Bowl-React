@@ -6,28 +6,24 @@ import Button from 'react-bootstrap/Button';
 import {LinkContainer} from 'react-router-bootstrap';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { searchPlayer } from '../API/ajaxHelpers';
 import '../index.css';
 
 const Navigation = () => {
   const navigate = useNavigate();
-  const [searchPup, setSearchPup] = useState({
-    search : ''
-  }
-  );
+  const [playerName, setPlayerName] = useState('');
 
   const handleSubmit = (e) => {
-    console.log('here');
-    navigate(``)
+    console.log('handleSubmit called!')
+    const playerId = searchPlayer(playerName);
+    navigate(`/players/${playerId}`);
+    clearSearchInput();
   }
 
-  const handleChange = (e) => {
-      e.preventDefault();
-      console.log(e.target.value);
-      setSearchPup({
-      ...searchPup, 
-      [e.target.name] : e.target.value
-   });
+  function clearSearchInput(){
+    setPlayerName('');
   }
+
   return(
   <>
   <Navbar bg="dark" data-bs-theme="dark" sticky="top">
@@ -51,13 +47,13 @@ const Navigation = () => {
           <Form className="d-flex">
             <Form.Control
               id='search-input'
-              onChange={handleChange}
+              onChange={(e) => setPlayerName(e.target.value)}
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
               name='search'
-              value={searchPup.search}
+              value={playerName}
             />
             <Button variant="outline-success" onClick={handleSubmit}>Search</Button>
           </Form>
