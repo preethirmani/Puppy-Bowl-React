@@ -7,7 +7,7 @@ import NewPlayer from './components/NewPlayer';
 
 
 
-function App() {
+ function App() {
 
 
   return (
