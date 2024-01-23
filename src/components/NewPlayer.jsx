@@ -25,6 +25,7 @@ const NewPlayer = () => {
     if(!newPlayer.name || !newPlayer.breed) {
       setError('Please Enter PlayerName and Breed')
     } else {
+      (newPlayer.teamId) === 0 ? newPlayer.teamId = 31 : newPlayer.teamId;
       const response = await createNewPlayer(newPlayer);
       if(response.success){
         console.log('Response.success');
