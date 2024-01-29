@@ -9,15 +9,24 @@ import { useNavigate } from 'react-router';
 import { searchPlayer } from '../API/ajaxHelpers';
 import '../index.css';
 
-const Navigation = () => {
+const Navigation = ({allPlayers, setSearchedPlayers}) => {
   const navigate = useNavigate();
   const [playerName, setPlayerName] = useState('');
 
   const handleSubmit = (e) => {
-    console.log('handleSubmit called!')
-    const playerId = searchPlayer(playerName);
-    navigate(`/players/${playerId}`);
+    console.log('handleSubmit called!');
+    console.log('PlayerName afterSubmit', playerName);
+    searchPlayer();
     clearSearchInput();
+  }
+
+  function searchPlayer() {
+    const players = allPlayers.filter(player => {
+      return player.name.toLowerCase() === playerName.toLowerCase();
+    });
+    console.log(players);
+    setSearchedPlayers(players);
+    navigate(`/search`);
   }
 
   function clearSearchInput(){
@@ -47,7 +56,9 @@ const Navigation = () => {
           <Form className="d-flex">
             <Form.Control
               id='search-input'
-              onChange={(e) => setPlayerName(e.target.value)}
+              onChange={(e) => {
+                console.log('playername onChange',e.target.value);
+                setPlayerName(e.target.value)}}
               type="search"
               placeholder="Search"
               className="me-2"

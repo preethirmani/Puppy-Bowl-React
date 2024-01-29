@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { fetchAllPlayers, deletePlayer } from "../API/ajaxHelpers";
 
 
-const AllPlayers = () => {
+const AllPlayers = ({setAllPlayers}) => {
 
   const [players, setPlayers] = useState([]);
 
@@ -15,6 +15,7 @@ const AllPlayers = () => {
       const data = await  fetchAllPlayers();
       console.log(data);
       setPlayers(data);
+      setAllPlayers(data);
       console.log(players);
     } 
     getPlayers();
@@ -45,10 +46,14 @@ const AllPlayers = () => {
                 <strong>Status: </strong>
                 {player.status}
               </div>
-              <Link 
-              onClick={(e) => handleDelete(player.id)} >
-                Delete
+                <Link className="deleteLink"
+                  onClick={(e) => handleDelete(player.id)} >
+                  Delete
                 </Link>
+                <Link to={`/players/${player.id}`}>
+                  Details
+                </Link>
+
               </div>
             </div>
           )
